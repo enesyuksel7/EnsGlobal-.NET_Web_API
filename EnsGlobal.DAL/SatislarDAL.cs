@@ -37,12 +37,7 @@ namespace EnsGlobal.DAL
             db.SaveChanges();
             return satis;
         }
-        /// <summary>
-        /// satislari guncelle
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="satis"></param>
-        /// <returns></returns>
+
         public Satislar UpdateSatis(int id, Satislar satis)
         {
             cpce();
