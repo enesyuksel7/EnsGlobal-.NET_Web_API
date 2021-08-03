@@ -2,6 +2,8 @@
 using EnsGlobal.DAL;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -14,6 +16,12 @@ namespace EnsGlobal.API.Controllers
     public class SatislarController : ApiController
     {
         SatislarDAL satisDAL = new SatislarDAL();
+        EnsGlobalDBEntities db = new EnsGlobalDBEntities();
+
+        public void cp()
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+        }
 
         [Authorize]
         [ResponseType(typeof(IEnumerable<Satislar>))]
@@ -47,19 +55,19 @@ namespace EnsGlobal.API.Controllers
         }
 
         [Authorize]
-        [HttpPut]
         [ResponseType(typeof(Satislar))]
         public IHttpActionResult Put(int id, Satislar satis)
         {
             if (satisDAL.IsThereAnySatis(id) == false)
                 return NotFound();
-            else if (ModelState.IsValid == false)
-                return BadRequest(ModelState);
+            else if(ModelState.IsValid == false)
+                return BadRequest();
             else
                 return Ok(satisDAL.UpdateSatis(id, satis));
         }
 
         [Authorize]
+        [ResponseType(typeof(Satislar))]
         public IHttpActionResult Delete(int id)
         {
             if (satisDAL.IsThereAnySatis(id) == false)

@@ -25,10 +25,10 @@ namespace EnsGlobal.DAL
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Kullanicilar> Kullanicilar { get; set; }
         public virtual DbSet<Musteriler> Musteriler { get; set; }
         public virtual DbSet<Satislar> Satislar { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Urunler> Urunler { get; set; }
-        public virtual DbSet<Kullanicilar> Kullanicilar { get; set; }
     }
 }

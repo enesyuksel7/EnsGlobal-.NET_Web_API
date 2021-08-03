@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -10,7 +11,6 @@ namespace EnsGlobal.DAL
     public class SatislarDAL
     {
         EnsGlobalDBEntities db = new EnsGlobalDBEntities();
-
         public void cpce()
         {
             db.Configuration.ProxyCreationEnabled = false;

@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c035ed65a9594edd9944e374cafa985d" Name="Diagram1">
+      <Diagram DiagramId="1be1c58dfc8d498c8ccb7a03d26c2875" Name="Diagram1">
+        <EntityTypeShape EntityType="EnsGlobalDBModel.Kullanicilar" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EnsGlobalDBModel.Musteriler" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="EnsGlobalDBModel.Satislar" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="EnsGlobalDBModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnsGlobalDBModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EnsGlobalDBModel.Urunler" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="EnsGlobalDBModel.FK_Musteriler_Satislar" ManuallyRouted="false" />
         <AssociationConnector Association="EnsGlobalDBModel.FK_Satislar_Urunler" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="EnsGlobalDBModel.Kullanicilar" Width="1.5" PointX="3.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

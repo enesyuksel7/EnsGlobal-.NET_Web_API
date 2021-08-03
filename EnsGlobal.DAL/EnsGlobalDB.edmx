@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="EnsGlobalDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="EnsGlobalDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Kullanicilar">
           <Key>
             <PropertyRef Name="KullaniciID" />
@@ -98,10 +98,20 @@
             <End Role="Satislar" EntitySet="Satislar" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EnsGlobalDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Kullanicilar">
+          <Key>
+            <PropertyRef Name="KullaniciID" />
+          </Key>
+          <Property Name="KullaniciID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Musteriler">
           <Key>
             <PropertyRef Name="MusteriID" />
@@ -176,6 +186,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="EnsGlobalDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Kullanicilar" EntityType="Self.Kullanicilar" />
           <EntitySet Name="Musteriler" EntityType="Self.Musteriler" />
           <EntitySet Name="Satislar" EntityType="Self.Satislar" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
@@ -188,23 +199,23 @@
             <End Role="Urunler" EntitySet="Urunler" />
             <End Role="Satislar" EntitySet="Satislar" />
           </AssociationSet>
-          <EntitySet Name="Kullanicilar" EntityType="EnsGlobalDBModel.Kullanicilar" />
         </EntityContainer>
-        <EntityType Name="Kullanicilar">
-          <Key>
-            <PropertyRef Name="KullaniciID" />
-          </Key>
-          <Property Name="KullaniciID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="KullaniciKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EnsGlobalDBModelStoreContainer" CdmEntityContainer="EnsGlobalDBEntities">
+          <EntitySetMapping Name="Kullanicilar">
+            <EntityTypeMapping TypeName="EnsGlobalDBModel.Kullanicilar">
+              <MappingFragment StoreEntitySet="Kullanicilar">
+                <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+                <ScalarProperty Name="KullaniciKey" ColumnName="KullaniciKey" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Musteriler">
             <EntityTypeMapping TypeName="EnsGlobalDBModel.Musteriler">
               <MappingFragment StoreEntitySet="Musteriler">
@@ -251,16 +262,6 @@
                 <ScalarProperty Name="BarkodNo" ColumnName="BarkodNo" />
                 <ScalarProperty Name="Agirlik" ColumnName="Agirlik" />
                 <ScalarProperty Name="GirisTarihi" ColumnName="GirisTarihi" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Kullanicilar">
-            <EntityTypeMapping TypeName="EnsGlobalDBModel.Kullanicilar">
-              <MappingFragment StoreEntitySet="Kullanicilar">
-                <ScalarProperty Name="Rol" ColumnName="Rol" />
-                <ScalarProperty Name="Ad" ColumnName="Ad" />
-                <ScalarProperty Name="KullaniciKey" ColumnName="KullaniciKey" />
-                <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
