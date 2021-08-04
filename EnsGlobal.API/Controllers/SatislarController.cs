@@ -1,7 +1,6 @@
-﻿using EnsGlobal.API.Attribute;
-using EnsGlobal.DAL;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -9,76 +8,129 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using EnsGlobal.API.Attribute;
+using EnsGlobal.DAL;
 
 namespace EnsGlobal.API.Controllers
 {
     [ApiExceptionAttribute]
     public class SatislarController : ApiController
     {
-        SatislarDAL satisDAL = new SatislarDAL();
-        EnsGlobalDBEntities db = new EnsGlobalDBEntities();
+        ConnectionsDAL cncDAL = new ConnectionsDAL();
 
-        public void cp()
-        {
-            db.Configuration.ProxyCreationEnabled = false;
-        }
-
-        [Authorize]
-        [ResponseType(typeof(IEnumerable<Satislar>))]
-        public IHttpActionResult Get()
-        {
-            var sorgu = satisDAL.GetAllSatislar();
-            return Ok(sorgu);
-        }
-
+        // GET: api/Satislar
         [Authorize]
         [ResponseType(typeof(Satislar))]
-        public IHttpActionResult Get(int id)
+        public IQueryable GetSatislar()
         {
-            var Satislar = satisDAL.GetSatislarById(id);
-            if (Satislar == null)
+            cncDAL.cpce();
+            var sorguAll = (from x in cncDAL.db.Satislar select new { 
+                x.Yetkili, 
+                x.Tarih, 
+                x.Ucret, 
+                x.Vergi 
+            });
+
+            return sorguAll;
+        }
+
+        // GET: api/Satislar/5
+        [Authorize]
+        [ResponseType(typeof(Satislar))]
+        public IHttpActionResult GetSatislar(int id)
+        {
+            var sorguID = (from x in cncDAL.db.Satislar where x.SatisID == id select new { 
+                x.Yetkili, 
+                x.Tarih, 
+                x.Ucret, 
+                x.Vergi
+            }).FirstOrDefault();
+
+            cncDAL.cpce();
+            if (sorguID == null)
                 return NotFound();
-            return Ok(Satislar);
+
+            return Ok(sorguID);
         }
 
+        // PUT: api/Satislar/5
         [Authorize]
-        [ResponseType(typeof(Satislar))]
-        public IHttpActionResult Post(Satislar satis)
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutSatislar(int id, Satislar satis)
         {
-            if (ModelState.IsValid)
-            {
-                var createdAraba = satisDAL.CreateSatis(satis);
-                return CreatedAtRoute("DefaultApi", new { id = createdAraba.SatisID }, createdAraba);
-            }
-            else
+            cncDAL.cpce();
+            if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-        }
 
-        [Authorize]
-        [ResponseType(typeof(Satislar))]
-        public IHttpActionResult Put(int id, Satislar satis)
-        {
-            if (satisDAL.IsThereAnySatis(id) == false)
-                return NotFound();
-            else if(ModelState.IsValid == false)
+            if (id != satis.SatisID)
                 return BadRequest();
-            else
-                return Ok(satisDAL.UpdateSatis(id, satis));
+
+            cncDAL.db.Entry(satis).State = EntityState.Modified;
+
+            try
+            {
+                cncDAL.db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!SatislarExists(id))
+                    return NotFound();
+                else
+                    throw;
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
+        // POST: api/Satislar
+
+        /// <summary>
+        /// Postmanda POST işlemi yaparken json parametrelerine SatisID ve UrunID ekle!
+        /// </summary>
+        /// <param name="satis"></param>
+        /// <returns></returns>
         [Authorize]
         [ResponseType(typeof(Satislar))]
-        public IHttpActionResult Delete(int id)
+        public IHttpActionResult PostSatislar(Satislar satis)
         {
-            if (satisDAL.IsThereAnySatis(id) == false)
-            {
+            cncDAL.cpce();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            cncDAL.db.Satislar.Add(satis);
+            cncDAL.db.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = satis.SatisID }, satis);
+        }
+
+        // DELETE: api/Satislar/5
+        [Authorize]
+        [ResponseType(typeof(Satislar))]
+        public IHttpActionResult DeleteSatislar(int id)
+        {
+            cncDAL.cpce();
+            Satislar satislar = cncDAL.db.Satislar.Find(id);
+            if (satislar == null)
                 return NotFound();
-            }
-            else
-            {
-                satisDAL.DeleteSatis(id);
-                return StatusCode(HttpStatusCode.NoContent);
-            }
+
+            cncDAL.db.Satislar.Remove(satislar);
+            cncDAL.db.SaveChanges();
+
+            return Ok(satislar);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            cncDAL.cpce();
+            if (disposing)
+                cncDAL.db.Dispose();
+            base.Dispose(disposing);
+        }
+
+        private bool SatislarExists(int id)
+        {
+            cncDAL.cpce();
+            return cncDAL.db.Satislar.Count(e => e.SatisID == id) > 0;
         }
     }
 }
