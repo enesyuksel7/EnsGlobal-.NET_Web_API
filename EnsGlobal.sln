@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnsGlobal.DAL", "EnsGlobal.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnsGlobal.API", "EnsGlobal.API\EnsGlobal.API.csproj", "{5B3D60FD-6D11-4F78-A2FF-5ABF361F6DC6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnsGlobal.FORM", "EnsGlobal.FORM\EnsGlobal.FORM.csproj", "{56F3910D-6E44-4B10-94AE-9DD01CA73DD5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{5B3D60FD-6D11-4F78-A2FF-5ABF361F6DC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B3D60FD-6D11-4F78-A2FF-5ABF361F6DC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B3D60FD-6D11-4F78-A2FF-5ABF361F6DC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56F3910D-6E44-4B10-94AE-9DD01CA73DD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56F3910D-6E44-4B10-94AE-9DD01CA73DD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56F3910D-6E44-4B10-94AE-9DD01CA73DD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56F3910D-6E44-4B10-94AE-9DD01CA73DD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

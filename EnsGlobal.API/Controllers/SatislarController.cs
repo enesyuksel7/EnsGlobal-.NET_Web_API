@@ -24,12 +24,15 @@ namespace EnsGlobal.API.Controllers
         public IQueryable GetSatislar()
         {
             cncDAL.cpce();
-            var sorguAll = (from x in cncDAL.db.Satislar select new { 
-                x.Yetkili, 
-                x.Tarih, 
-                x.Ucret, 
-                x.Vergi 
-            });
+
+            var sorguAll = (from x in cncDAL.db.Satislar
+                            select new
+                            {
+                                x.Yetkili,
+                                x.Tarih,
+                                x.Ucret,
+                                x.Vergi
+                            });
 
             return sorguAll;
         }
@@ -39,14 +42,18 @@ namespace EnsGlobal.API.Controllers
         [ResponseType(typeof(Satislar))]
         public IHttpActionResult GetSatislar(int id)
         {
-            var sorguID = (from x in cncDAL.db.Satislar where x.SatisID == id select new { 
-                x.Yetkili, 
-                x.Tarih, 
-                x.Ucret, 
-                x.Vergi
-            }).FirstOrDefault();
-
             cncDAL.cpce();
+
+            var sorguID = (from x in cncDAL.db.Satislar
+                           where x.SatisID == id
+                           select new
+                           {
+                               x.Yetkili,
+                               x.Tarih,
+                               x.Ucret,
+                               x.Vergi
+                           }).FirstOrDefault();
+
             if (sorguID == null)
                 return NotFound();
 
