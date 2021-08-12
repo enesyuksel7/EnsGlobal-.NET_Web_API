@@ -40,12 +40,11 @@ namespace EnsGlobal.FORM
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.TbYetkili = new System.Windows.Forms.TextBox();
-            this.TbUcret = new System.Windows.Forms.TextBox();
-            this.TbID = new System.Windows.Forms.TextBox();
+            this.txtYetkili = new System.Windows.Forms.TextBox();
+            this.txtUcret = new System.Windows.Forms.TextBox();
+            this.txtSatisID = new System.Windows.Forms.TextBox();
             this.RtbResponce = new System.Windows.Forms.RichTextBox();
-            this.TbTarih = new System.Windows.Forms.TextBox();
-            this.TbVergi = new System.Windows.Forms.TextBox();
+            this.txtVergi = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -53,7 +52,8 @@ namespace EnsGlobal.FORM
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label7 = new System.Windows.Forms.Label();
-            this.TbUrunID = new System.Windows.Forms.TextBox();
+            this.txtUrunID = new System.Windows.Forms.TextBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -62,7 +62,6 @@ namespace EnsGlobal.FORM
             // BtnGET
             // 
             this.BtnGET.BackColor = System.Drawing.Color.MidnightBlue;
-            this.BtnGET.Enabled = false;
             this.BtnGET.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnGET.ForeColor = System.Drawing.Color.White;
             this.BtnGET.Location = new System.Drawing.Point(245, 141);
@@ -76,7 +75,6 @@ namespace EnsGlobal.FORM
             // BtnPUT
             // 
             this.BtnPUT.BackColor = System.Drawing.Color.MidnightBlue;
-            this.BtnPUT.Enabled = false;
             this.BtnPUT.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnPUT.ForeColor = System.Drawing.Color.White;
             this.BtnPUT.Location = new System.Drawing.Point(809, 84);
@@ -103,7 +101,6 @@ namespace EnsGlobal.FORM
             // BtnPOST
             // 
             this.BtnPOST.BackColor = System.Drawing.Color.MidnightBlue;
-            this.BtnPOST.Enabled = false;
             this.BtnPOST.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnPOST.ForeColor = System.Drawing.Color.White;
             this.BtnPOST.Location = new System.Drawing.Point(664, 83);
@@ -117,7 +114,6 @@ namespace EnsGlobal.FORM
             // BtnDELETE
             // 
             this.BtnDELETE.BackColor = System.Drawing.Color.MidnightBlue;
-            this.BtnDELETE.Enabled = false;
             this.BtnDELETE.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnDELETE.ForeColor = System.Drawing.Color.White;
             this.BtnDELETE.Location = new System.Drawing.Point(753, 209);
@@ -139,6 +135,7 @@ namespace EnsGlobal.FORM
             this.BtnKucult.TabIndex = 6;
             this.BtnKucult.Text = "_";
             this.BtnKucult.UseVisualStyleBackColor = false;
+            this.BtnKucult.Click += new System.EventHandler(this.BtnKucult_Click);
             // 
             // BtnCikis
             // 
@@ -151,6 +148,7 @@ namespace EnsGlobal.FORM
             this.BtnCikis.TabIndex = 7;
             this.BtnCikis.Text = "X";
             this.BtnCikis.UseVisualStyleBackColor = false;
+            this.BtnCikis.Click += new System.EventHandler(this.BtnCikis_Click);
             // 
             // label1
             // 
@@ -181,27 +179,27 @@ namespace EnsGlobal.FORM
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
             // 
-            // TbYetkili
+            // txtYetkili
             // 
-            this.TbYetkili.Location = new System.Drawing.Point(489, 141);
-            this.TbYetkili.Name = "TbYetkili";
-            this.TbYetkili.Size = new System.Drawing.Size(123, 26);
-            this.TbYetkili.TabIndex = 11;
+            this.txtYetkili.Location = new System.Drawing.Point(489, 141);
+            this.txtYetkili.Name = "txtYetkili";
+            this.txtYetkili.Size = new System.Drawing.Size(140, 26);
+            this.txtYetkili.TabIndex = 11;
             // 
-            // TbUcret
+            // txtUcret
             // 
-            this.TbUcret.Location = new System.Drawing.Point(489, 220);
-            this.TbUcret.Name = "TbUcret";
-            this.TbUcret.Size = new System.Drawing.Size(123, 26);
-            this.TbUcret.TabIndex = 12;
+            this.txtUcret.Location = new System.Drawing.Point(489, 220);
+            this.txtUcret.Name = "txtUcret";
+            this.txtUcret.Size = new System.Drawing.Size(140, 26);
+            this.txtUcret.TabIndex = 12;
             // 
-            // TbID
+            // txtSatisID
             // 
-            this.TbID.Location = new System.Drawing.Point(276, 106);
-            this.TbID.Name = "TbID";
-            this.TbID.Size = new System.Drawing.Size(92, 26);
-            this.TbID.TabIndex = 13;
-            this.TbID.TextChanged += new System.EventHandler(this.TbID_TextChanged);
+            this.txtSatisID.Location = new System.Drawing.Point(276, 106);
+            this.txtSatisID.Name = "txtSatisID";
+            this.txtSatisID.Size = new System.Drawing.Size(92, 26);
+            this.txtSatisID.TabIndex = 13;
+            this.txtSatisID.TextChanged += new System.EventHandler(this.txtSatisID_TextChanged);
             // 
             // RtbResponce
             // 
@@ -211,19 +209,12 @@ namespace EnsGlobal.FORM
             this.RtbResponce.TabIndex = 14;
             this.RtbResponce.Text = "";
             // 
-            // TbTarih
+            // txtVergi
             // 
-            this.TbTarih.Location = new System.Drawing.Point(489, 182);
-            this.TbTarih.Name = "TbTarih";
-            this.TbTarih.Size = new System.Drawing.Size(123, 26);
-            this.TbTarih.TabIndex = 15;
-            // 
-            // TbVergi
-            // 
-            this.TbVergi.Location = new System.Drawing.Point(489, 259);
-            this.TbVergi.Name = "TbVergi";
-            this.TbVergi.Size = new System.Drawing.Size(123, 26);
-            this.TbVergi.TabIndex = 16;
+            this.txtVergi.Location = new System.Drawing.Point(489, 259);
+            this.txtVergi.Name = "txtVergi";
+            this.txtVergi.Size = new System.Drawing.Size(140, 26);
+            this.txtVergi.TabIndex = 16;
             // 
             // label2
             // 
@@ -279,7 +270,7 @@ namespace EnsGlobal.FORM
             // 
             this.dataGridView1.BackgroundColor = System.Drawing.Color.Maroon;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.GridColor = System.Drawing.Color.Black;
+            this.dataGridView1.GridColor = System.Drawing.Color.Maroon;
             this.dataGridView1.Location = new System.Drawing.Point(48, 365);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(401, 280);
@@ -295,12 +286,19 @@ namespace EnsGlobal.FORM
             this.label7.TabIndex = 24;
             this.label7.Text = "Ürün ID:";
             // 
-            // TbUrunID
+            // txtUrunID
             // 
-            this.TbUrunID.Location = new System.Drawing.Point(489, 102);
-            this.TbUrunID.Name = "TbUrunID";
-            this.TbUrunID.Size = new System.Drawing.Size(123, 26);
-            this.TbUrunID.TabIndex = 23;
+            this.txtUrunID.Location = new System.Drawing.Point(489, 102);
+            this.txtUrunID.Name = "txtUrunID";
+            this.txtUrunID.Size = new System.Drawing.Size(140, 26);
+            this.txtUrunID.TabIndex = 23;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(489, 182);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(140, 26);
+            this.dateTimePicker1.TabIndex = 25;
             // 
             // FormAPI
             // 
@@ -308,20 +306,20 @@ namespace EnsGlobal.FORM
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1127, 715);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.TbUrunID);
+            this.Controls.Add(this.txtUrunID);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.TbVergi);
-            this.Controls.Add(this.TbTarih);
+            this.Controls.Add(this.txtVergi);
             this.Controls.Add(this.RtbResponce);
-            this.Controls.Add(this.TbID);
-            this.Controls.Add(this.TbUcret);
-            this.Controls.Add(this.TbYetkili);
+            this.Controls.Add(this.txtSatisID);
+            this.Controls.Add(this.txtUcret);
+            this.Controls.Add(this.txtYetkili);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.BtnCikis);
@@ -360,12 +358,11 @@ namespace EnsGlobal.FORM
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.TextBox TbYetkili;
-        private System.Windows.Forms.TextBox TbUcret;
-        private System.Windows.Forms.TextBox TbID;
+        private System.Windows.Forms.TextBox txtYetkili;
+        private System.Windows.Forms.TextBox txtUcret;
+        private System.Windows.Forms.TextBox txtSatisID;
         private System.Windows.Forms.RichTextBox RtbResponce;
-        private System.Windows.Forms.TextBox TbTarih;
-        private System.Windows.Forms.TextBox TbVergi;
+        private System.Windows.Forms.TextBox txtVergi;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -373,6 +370,7 @@ namespace EnsGlobal.FORM
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox TbUrunID;
+        private System.Windows.Forms.TextBox txtUrunID;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }

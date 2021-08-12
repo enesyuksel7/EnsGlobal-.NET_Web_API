@@ -8,6 +8,9 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Security.Policy;
+using EnsGlobal.DAL;
+using System.Net.Http.Json;
 
 namespace EnsGlobal.FORM
 {
@@ -18,6 +21,10 @@ namespace EnsGlobal.FORM
             InitializeComponent();
         }
 
+        private string apiURL = "http://www.mekadeneme.somee.com/api/";
+
+        EnsGlobalDBEntities db = new DAL.EnsGlobalDBEntities();
+
         private async void BtnGETALL_Click(object sender, EventArgs e)
         {
             var responce = await RestHelper.GetALL();
@@ -25,46 +32,40 @@ namespace EnsGlobal.FORM
             dataGridView1.DataSource = responce;
         }
 
-        private void TbID_TextChanged(object sender, EventArgs e)
+        private void txtSatisID_TextChanged(object sender, EventArgs e)
         {
             BtnGET.Enabled = BtnPOST.Enabled = BtnPUT.Enabled = BtnDELETE.Enabled = true;
         }
 
         private async void BtnGET_Click(object sender, EventArgs e)
         {
-            var responce = await RestHelper.Get(TbID.Text);
+            var responce = await RestHelper.Get(txtSatisID.Text);
             RtbResponce.Text = responce;
         }
 
         private async void BtnPOST_Click(object sender, EventArgs e)
         {
-            //var responce = await RestHelper.Post(Convert.ToInt32(TbID.Text), TbYetkili.Text, Convert.ToDateTime(TbTarih.Text),Convert.ToInt32(TbUcret.Text), Convert.ToInt32(TbVergi.Text));
-            //RtbResponce.Text = responce;
+            var responce = await RestHelper.Post(txtUrunID.Text, txtYetkili.Text, dateTimePicker1.Text, txtUcret.Text, txtVergi.Text);
+            RtbResponce.Text = responce;
         }
 
-        private async void BtnPUT_Click(object sender, EventArgs e)
+        private void BtnPUT_Click(object sender, EventArgs e)
         {
-
+            //async yaz private async void
         }
 
         private async void BtnDELETE_Click(object sender, EventArgs e)
         {
-            var responce = await Delete(TbID.Text);
+            var responce = await Delete(txtUrunID.Text);
             RtbResponce.Text = responce;
         }
-
-
-
-        
-
-
 
 
         private async Task<string> Delete(string id)
         {
             using (HttpClient client = new HttpClient())
             {
-                using (HttpResponseMessage res = await client.DeleteAsync("http://www.mekadeneme.somee.com/api/" + "Satislar/" + id + "?apiKey=ePzsLed_9h)x%Zg{"))
+                using (HttpResponseMessage res = await client.DeleteAsync(apiURL + "Satislar/" + id + "?apiKey=ePzsLed_9h)x%Zg{"))
                 {
                     using (HttpContent content = res.Content)
                     {
@@ -84,8 +85,19 @@ namespace EnsGlobal.FORM
         {
             using (HttpClient httpClient = new HttpClient())
             {
-                var users = await httpClient.GetFromJsonAsync<List<Satis>>(new Uri(url));
+                var kayitlar = await httpClient.GetFromJsonAsync<List<Satislar>>(apiURL + "Satislar?apiKey=ePzsLed_9h)x%Zg{");
+                dataGridView1.DataSource = kayitlar;
             }
+        }
+
+        private void BtnKucult_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnCikis_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
