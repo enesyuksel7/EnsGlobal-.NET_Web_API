@@ -12,27 +12,18 @@ namespace EnsGlobal.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Satislar
+    public partial class Sigortalar
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Satislar()
-        {
-            this.Sigortalar = new HashSet<Sigortalar>();
-        }
-    
+        public int SigortaID { get; set; }
         public int SatisID { get; set; }
-        public int ArabaID { get; set; }
         public int SubeID { get; set; }
         public string Marka { get; set; }
         public string Model { get; set; }
-        public string AdSoyad { get; set; }
+        public Nullable<System.DateTime> BaslangicT { get; set; }
+        public Nullable<System.DateTime> BitisT { get; set; }
         public Nullable<int> Ucret { get; set; }
-        public Nullable<System.DateTime> Tarih { get; set; }
-        public Nullable<int> TelNo { get; set; }
     
-        public virtual Arabalar Arabalar { get; set; }
+        public virtual Satislar Satislar { get; set; }
         public virtual SubeAbonelik SubeAbonelik { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sigortalar> Sigortalar { get; set; }
     }
 }
