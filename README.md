@@ -1,2 +1,2 @@
 # EnsGlobal-.NET_Web_API
-Meka için geliştirdiğim api servisi
+Meka için geliştirdiğim ilk Web API projesi
