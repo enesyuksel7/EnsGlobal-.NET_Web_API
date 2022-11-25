@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OtoGaleriDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Arabalar">
+    <Key>
+      <PropertyRef Name="ArabaID" />
+    </Key>
+    <Property Name="ArabaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubeID" Type="Int32" />
+    <Property Name="Marka" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Yil" Type="Int32" />
+    <Property Name="Yakit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Vites" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MotorGucu" Type="Int32" />
+    <Property Name="MotorHacmi" Type="Int32" />
+    <NavigationProperty Name="SubeAbonelik" Relationship="Self.FK_Arabalar_SubeAbonelik" FromRole="Arabalar" ToRole="SubeAbonelik" />
+    <NavigationProperty Name="Satislar" Relationship="Self.FK_Satislar_Arabalar" FromRole="Arabalar" ToRole="Satislar" />
+  </EntityType>
+  <EntityType Name="MasterAdmin">
+    <Key>
+      <PropertyRef Name="MasterID" />
+    </Key>
+    <Property Name="MasterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="MasterLog">
+    <Key>
+      <PropertyRef Name="LogID" />
+    </Key>
+    <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Tarih" Type="DateTime" Precision="3" />
+    <Property Name="Islem" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Satislar">
+    <Key>
+      <PropertyRef Name="SatisID" />
+    </Key>
+    <Property Name="SatisID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ArabaID" Type="Int32" Nullable="false" />
+    <Property Name="SubeID" Type="Int32" Nullable="false" />
+    <Property Name="Marka" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AdSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Ucret" Type="Int32" />
+    <Property Name="Tarih" Type="DateTime" Precision="0" />
+    <Property Name="TelNo" Type="Int32" />
+    <NavigationProperty Name="Arabalar" Relationship="Self.FK_Satislar_Arabalar" FromRole="Satislar" ToRole="Arabalar" />
+    <NavigationProperty Name="SubeAbonelik" Relationship="Self.FK_Satislar_SubeAbonelik" FromRole="Satislar" ToRole="SubeAbonelik" />
+    <NavigationProperty Name="Sigortalar" Relationship="Self.FK_Sigortalar_Satislar" FromRole="Satislar" ToRole="Sigortalar" />
+  </EntityType>
+  <EntityType Name="Sigortalar">
+    <Key>
+      <PropertyRef Name="SigortaID" />
+    </Key>
+    <Property Name="SigortaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SatisID" Type="Int32" Nullable="false" />
+    <Property Name="SubeID" Type="Int32" Nullable="false" />
+    <Property Name="Marka" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BaslangicT" Type="DateTime" Precision="3" />
+    <Property Name="BitisT" Type="DateTime" Precision="3" />
+    <Property Name="Ucret" Type="Int32" />
+    <NavigationProperty Name="Satislar" Relationship="Self.FK_Sigortalar_Satislar" FromRole="Sigortalar" ToRole="Satislar" />
+    <NavigationProperty Name="SubeAbonelik" Relationship="Self.FK_Sigortalar_SubeAbonelik" FromRole="Sigortalar" ToRole="SubeAbonelik" />
+  </EntityType>
+  <EntityType Name="SubeAbonelik">
+    <Key>
+      <PropertyRef Name="SubeID" />
+    </Key>
+    <Property Name="SubeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubeAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SehirAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SemtAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Arabalar" Relationship="Self.FK_Arabalar_SubeAbonelik" FromRole="SubeAbonelik" ToRole="Arabalar" />
+    <NavigationProperty Name="Satislar" Relationship="Self.FK_Satislar_SubeAbonelik" FromRole="SubeAbonelik" ToRole="Satislar" />
+    <NavigationProperty Name="Sigortalar" Relationship="Self.FK_Sigortalar_SubeAbonelik" FromRole="SubeAbonelik" ToRole="Sigortalar" />
+    <NavigationProperty Name="SubeAdmin" Relationship="Self.FK_SubeAdmin_SubeAbonelik" FromRole="SubeAbonelik" ToRole="SubeAdmin" />
+  </EntityType>
+  <EntityType Name="SubeAdmin">
+    <Key>
+      <PropertyRef Name="AdminID" />
+    </Key>
+    <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubeID" Type="Int32" Nullable="false" />
+    <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SubeAbonelik" Relationship="Self.FK_SubeAdmin_SubeAbonelik" FromRole="SubeAdmin" ToRole="SubeAbonelik" />
+  </EntityType>
+  <EntityType Name="SubeLog">
+    <Key>
+      <PropertyRef Name="LogID" />
+    </Key>
+    <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Tarih" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Islem" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Arabalar_SubeAbonelik">
+    <End Role="SubeAbonelik" Type="Self.SubeAbonelik" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Arabalar" Type="Self.Arabalar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubeAbonelik">
+        <PropertyRef Name="SubeID" />
+      </Principal>
+      <Dependent Role="Arabalar">
+        <PropertyRef Name="SubeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Satislar_Arabalar">
+    <End Role="Arabalar" Type="Self.Arabalar" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Satislar" Type="Self.Satislar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Arabalar">
+        <PropertyRef Name="ArabaID" />
+      </Principal>
+      <Dependent Role="Satislar">
+        <PropertyRef Name="ArabaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Satislar_SubeAbonelik">
+    <End Role="SubeAbonelik" Type="Self.SubeAbonelik" Multiplicity="1" />
+    <End Role="Satislar" Type="Self.Satislar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubeAbonelik">
+        <PropertyRef Name="SubeID" />
+      </Principal>
+      <Dependent Role="Satislar">
+        <PropertyRef Name="SubeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sigortalar_Satislar">
+    <End Role="Satislar" Type="Self.Satislar" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Sigortalar" Type="Self.Sigortalar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Satislar">
+        <PropertyRef Name="SatisID" />
+      </Principal>
+      <Dependent Role="Sigortalar">
+        <PropertyRef Name="SatisID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sigortalar_SubeAbonelik">
+    <End Role="SubeAbonelik" Type="Self.SubeAbonelik" Multiplicity="1" />
+    <End Role="Sigortalar" Type="Self.Sigortalar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubeAbonelik">
+        <PropertyRef Name="SubeID" />
+      </Principal>
+      <Dependent Role="Sigortalar">
+        <PropertyRef Name="SubeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubeAdmin_SubeAbonelik">
+    <End Role="SubeAbonelik" Type="Self.SubeAbonelik" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SubeAdmin" Type="Self.SubeAdmin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubeAbonelik">
+        <PropertyRef Name="SubeID" />
+      </Principal>
+      <Dependent Role="SubeAdmin">
+        <PropertyRef Name="SubeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OtoGaleriDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Arabalar" EntityType="Self.Arabalar" />
+    <EntitySet Name="MasterAdmin" EntityType="Self.MasterAdmin" />
+    <EntitySet Name="MasterLog" EntityType="Self.MasterLog" />
+    <EntitySet Name="Satislar" EntityType="Self.Satislar" />
+    <EntitySet Name="Sigortalar" EntityType="Self.Sigortalar" />
+    <EntitySet Name="SubeAbonelik" EntityType="Self.SubeAbonelik" />
+    <EntitySet Name="SubeAdmin" EntityType="Self.SubeAdmin" />
+    <EntitySet Name="SubeLog" EntityType="Self.SubeLog" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <AssociationSet Name="FK_Arabalar_SubeAbonelik" Association="Self.FK_Arabalar_SubeAbonelik">
+      <End Role="SubeAbonelik" EntitySet="SubeAbonelik" />
+      <End Role="Arabalar" EntitySet="Arabalar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Satislar_Arabalar" Association="Self.FK_Satislar_Arabalar">
+      <End Role="Arabalar" EntitySet="Arabalar" />
+      <End Role="Satislar" EntitySet="Satislar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Satislar_SubeAbonelik" Association="Self.FK_Satislar_SubeAbonelik">
+      <End Role="SubeAbonelik" EntitySet="SubeAbonelik" />
+      <End Role="Satislar" EntitySet="Satislar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sigortalar_Satislar" Association="Self.FK_Sigortalar_Satislar">
+      <End Role="Satislar" EntitySet="Satislar" />
+      <End Role="Sigortalar" EntitySet="Sigortalar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sigortalar_SubeAbonelik" Association="Self.FK_Sigortalar_SubeAbonelik">
+      <End Role="SubeAbonelik" EntitySet="SubeAbonelik" />
+      <End Role="Sigortalar" EntitySet="Sigortalar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubeAdmin_SubeAbonelik" Association="Self.FK_SubeAdmin_SubeAbonelik">
+      <End Role="SubeAbonelik" EntitySet="SubeAbonelik" />
+      <End Role="SubeAdmin" EntitySet="SubeAdmin" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
