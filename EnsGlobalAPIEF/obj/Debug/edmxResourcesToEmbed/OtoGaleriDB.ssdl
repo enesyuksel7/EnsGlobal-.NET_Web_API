@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OtoGaleriDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Arabalar">
+    <Key>
+      <PropertyRef Name="ArabaID" />
+    </Key>
+    <Property Name="ArabaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SubeID" Type="int" />
+    <Property Name="Marka" Type="nvarchar" MaxLength="50" />
+    <Property Name="Model" Type="nvarchar" MaxLength="50" />
+    <Property Name="Yil" Type="int" />
+    <Property Name="Yakit" Type="nvarchar" MaxLength="50" />
+    <Property Name="Vites" Type="nvarchar" MaxLength="50" />
+    <Property Name="MotorGucu" Type="int" />
+    <Property Name="MotorHacmi" Type="int" />
+  </EntityType>
+  <EntityType Name="MasterAdmin">
+    <Key>
+      <PropertyRef Name="MasterID" />
+    </Key>
+    <Property Name="MasterID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KullaniciAdi" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sifre" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="MasterLog">
+    <Key>
+      <PropertyRef Name="LogID" />
+    </Key>
+    <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KullaniciAdi" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tarih" Type="datetime" />
+    <Property Name="Islem" Type="nvarchar" MaxLength="50" />
+    <Property Name="Aciklama" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Satislar">
+    <Key>
+      <PropertyRef Name="SatisID" />
+    </Key>
+    <Property Name="SatisID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ArabaID" Type="int" Nullable="false" />
+    <Property Name="SubeID" Type="int" Nullable="false" />
+    <Property Name="Marka" Type="nvarchar" MaxLength="50" />
+    <Property Name="Model" Type="nvarchar" MaxLength="50" />
+    <Property Name="AdSoyad" Type="nvarchar" MaxLength="50" />
+    <Property Name="Ucret" Type="int" />
+    <Property Name="Tarih" Type="date" />
+    <Property Name="TelNo" Type="int" />
+  </EntityType>
+  <EntityType Name="Sigortalar">
+    <Key>
+      <PropertyRef Name="SigortaID" />
+    </Key>
+    <Property Name="SigortaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SatisID" Type="int" Nullable="false" />
+    <Property Name="SubeID" Type="int" Nullable="false" />
+    <Property Name="Marka" Type="nvarchar" MaxLength="50" />
+    <Property Name="Model" Type="nvarchar" MaxLength="50" />
+    <Property Name="BaslangicT" Type="datetime" />
+    <Property Name="BitisT" Type="datetime" />
+    <Property Name="Ucret" Type="int" />
+  </EntityType>
+  <EntityType Name="SubeAbonelik">
+    <Key>
+      <PropertyRef Name="SubeID" />
+    </Key>
+    <Property Name="SubeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SubeAd" Type="nvarchar" MaxLength="50" />
+    <Property Name="SehirAd" Type="nvarchar" MaxLength="50" />
+    <Property Name="SemtAd" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SubeAdmin">
+    <Key>
+      <PropertyRef Name="AdminID" />
+    </Key>
+    <Property Name="AdminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SubeID" Type="int" Nullable="false" />
+    <Property Name="KullaniciAdi" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sifre" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SubeLog">
+    <Key>
+      <PropertyRef Name="LogID" />
+    </Key>
+    <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KullaniciAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Tarih" Type="datetime" Nullable="false" />
+    <Property Name="Islem" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Aciklama" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_Arabalar_SubeAbonelik">
+    <End Role="SubeAbonelik" Type="Self.SubeAbonelik" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Arabalar" Type="Self.Arabalar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubeAbonelik">
+        <PropertyRef Name="SubeID" />
+      </Principal>
+      <Dependent Role="Arabalar">
+        <PropertyRef Name="SubeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Satislar_Arabalar">
+    <End Role="Arabalar" Type="Self.Arabalar" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Satislar" Type="Self.Satislar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Arabalar">
+        <PropertyRef Name="ArabaID" />
+      </Principal>
+      <Dependent Role="Satislar">
+        <PropertyRef Name="ArabaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Satislar_SubeAbonelik">
+    <End Role="SubeAbonelik" Type="Self.SubeAbonelik" Multiplicity="1" />
+    <End Role="Satislar" Type="Self.Satislar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubeAbonelik">
+        <PropertyRef Name="SubeID" />
+      </Principal>
+      <Dependent Role="Satislar">
+        <PropertyRef Name="SubeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sigortalar_Satislar">
+    <End Role="Satislar" Type="Self.Satislar" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Sigortalar" Type="Self.Sigortalar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Satislar">
+        <PropertyRef Name="SatisID" />
+      </Principal>
+      <Dependent Role="Sigortalar">
+        <PropertyRef Name="SatisID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sigortalar_SubeAbonelik">
+    <End Role="SubeAbonelik" Type="Self.SubeAbonelik" Multiplicity="1" />
+    <End Role="Sigortalar" Type="Self.Sigortalar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubeAbonelik">
+        <PropertyRef Name="SubeID" />
+      </Principal>
+      <Dependent Role="Sigortalar">
+        <PropertyRef Name="SubeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubeAdmin_SubeAbonelik">
+    <End Role="SubeAbonelik" Type="Self.SubeAbonelik" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SubeAdmin" Type="Self.SubeAdmin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubeAbonelik">
+        <PropertyRef Name="SubeID" />
+      </Principal>
+      <Dependent Role="SubeAdmin">
+        <PropertyRef Name="SubeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OtoGaleriDBModelStoreContainer">
+    <EntitySet Name="Arabalar" EntityType="Self.Arabalar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MasterAdmin" EntityType="Self.MasterAdmin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MasterLog" EntityType="Self.MasterLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Satislar" EntityType="Self.Satislar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sigortalar" EntityType="Self.Sigortalar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubeAbonelik" EntityType="Self.SubeAbonelik" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubeAdmin" EntityType="Self.SubeAdmin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubeLog" EntityType="Self.SubeLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Arabalar_SubeAbonelik" Association="Self.FK_Arabalar_SubeAbonelik">
+      <End Role="SubeAbonelik" EntitySet="SubeAbonelik" />
+      <End Role="Arabalar" EntitySet="Arabalar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Satislar_Arabalar" Association="Self.FK_Satislar_Arabalar">
+      <End Role="Arabalar" EntitySet="Arabalar" />
+      <End Role="Satislar" EntitySet="Satislar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Satislar_SubeAbonelik" Association="Self.FK_Satislar_SubeAbonelik">
+      <End Role="SubeAbonelik" EntitySet="SubeAbonelik" />
+      <End Role="Satislar" EntitySet="Satislar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sigortalar_Satislar" Association="Self.FK_Sigortalar_Satislar">
+      <End Role="Satislar" EntitySet="Satislar" />
+      <End Role="Sigortalar" EntitySet="Sigortalar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sigortalar_SubeAbonelik" Association="Self.FK_Sigortalar_SubeAbonelik">
+      <End Role="SubeAbonelik" EntitySet="SubeAbonelik" />
+      <End Role="Sigortalar" EntitySet="Sigortalar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubeAdmin_SubeAbonelik" Association="Self.FK_SubeAdmin_SubeAbonelik">
+      <End Role="SubeAbonelik" EntitySet="SubeAbonelik" />
+      <End Role="SubeAdmin" EntitySet="SubeAdmin" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

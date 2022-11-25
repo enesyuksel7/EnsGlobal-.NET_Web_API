@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OtoGaleriDBModelStoreContainer" CdmEntityContainer="OtoGaleriDBEntities">
+    <EntitySetMapping Name="Arabalar">
+      <EntityTypeMapping TypeName="OtoGaleriDBModel.Arabalar">
+        <MappingFragment StoreEntitySet="Arabalar">
+          <ScalarProperty Name="ArabaID" ColumnName="ArabaID" />
+          <ScalarProperty Name="SubeID" ColumnName="SubeID" />
+          <ScalarProperty Name="Marka" ColumnName="Marka" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Yil" ColumnName="Yil" />
+          <ScalarProperty Name="Yakit" ColumnName="Yakit" />
+          <ScalarProperty Name="Vites" ColumnName="Vites" />
+          <ScalarProperty Name="MotorGucu" ColumnName="MotorGucu" />
+          <ScalarProperty Name="MotorHacmi" ColumnName="MotorHacmi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MasterAdmin">
+      <EntityTypeMapping TypeName="OtoGaleriDBModel.MasterAdmin">
+        <MappingFragment StoreEntitySet="MasterAdmin">
+          <ScalarProperty Name="MasterID" ColumnName="MasterID" />
+          <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+          <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MasterLog">
+      <EntityTypeMapping TypeName="OtoGaleriDBModel.MasterLog">
+        <MappingFragment StoreEntitySet="MasterLog">
+          <ScalarProperty Name="LogID" ColumnName="LogID" />
+          <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+          <ScalarProperty Name="Islem" ColumnName="Islem" />
+          <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Satislar">
+      <EntityTypeMapping TypeName="OtoGaleriDBModel.Satislar">
+        <MappingFragment StoreEntitySet="Satislar">
+          <ScalarProperty Name="SatisID" ColumnName="SatisID" />
+          <ScalarProperty Name="ArabaID" ColumnName="ArabaID" />
+          <ScalarProperty Name="SubeID" ColumnName="SubeID" />
+          <ScalarProperty Name="Marka" ColumnName="Marka" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+          <ScalarProperty Name="Ucret" ColumnName="Ucret" />
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+          <ScalarProperty Name="TelNo" ColumnName="TelNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sigortalar">
+      <EntityTypeMapping TypeName="OtoGaleriDBModel.Sigortalar">
+        <MappingFragment StoreEntitySet="Sigortalar">
+          <ScalarProperty Name="SigortaID" ColumnName="SigortaID" />
+          <ScalarProperty Name="SatisID" ColumnName="SatisID" />
+          <ScalarProperty Name="SubeID" ColumnName="SubeID" />
+          <ScalarProperty Name="Marka" ColumnName="Marka" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="BaslangicT" ColumnName="BaslangicT" />
+          <ScalarProperty Name="BitisT" ColumnName="BitisT" />
+          <ScalarProperty Name="Ucret" ColumnName="Ucret" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubeAbonelik">
+      <EntityTypeMapping TypeName="OtoGaleriDBModel.SubeAbonelik">
+        <MappingFragment StoreEntitySet="SubeAbonelik">
+          <ScalarProperty Name="SubeID" ColumnName="SubeID" />
+          <ScalarProperty Name="SubeAd" ColumnName="SubeAd" />
+          <ScalarProperty Name="SehirAd" ColumnName="SehirAd" />
+          <ScalarProperty Name="SemtAd" ColumnName="SemtAd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubeAdmin">
+      <EntityTypeMapping TypeName="OtoGaleriDBModel.SubeAdmin">
+        <MappingFragment StoreEntitySet="SubeAdmin">
+          <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+          <ScalarProperty Name="SubeID" ColumnName="SubeID" />
+          <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+          <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubeLog">
+      <EntityTypeMapping TypeName="OtoGaleriDBModel.SubeLog">
+        <MappingFragment StoreEntitySet="SubeLog">
+          <ScalarProperty Name="LogID" ColumnName="LogID" />
+          <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+          <ScalarProperty Name="Islem" ColumnName="Islem" />
+          <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="OtoGaleriDBModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
